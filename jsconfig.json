@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
+
+// jsconfig is necessary as a project parser for eslint so that jest.config.js doesn't error

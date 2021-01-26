@@ -1,0 +1,17 @@
+schema: http://localhost:8080/graphql
+documents: './app/graphql/**/*.{tsx,ts}'
+overwrite: true
+generates:
+  ./app/graphql/types.tsx:
+    plugins:
+      - add: '/* eslint-disable */'
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
+    # The combined options of all provided plug-ins
+    # More information about the options below:
+    # graphql-code-generator.com/docs/plugins/typescript-react-apollo#configuration
+    config:
+      withHOC: false
+      withHooks: true
+      withComponent: false
