@@ -68,7 +68,7 @@ const LoginWithApple: FC = () => {
             setError(response.payload.errorMessage);
           } else if (response.type === 'LOGIN_USER_SUCCESS') {
             if (storeState.user.isAuthenticated === true) {
-              dispatch(push(routes.OPPORTUNITIES));
+              dispatch(push(routes.HOME));
             }
           }
 
@@ -97,7 +97,7 @@ const LoginWithApple: FC = () => {
           setError(response.payload.errorMessage);
         } else if (response.type === 'LOGIN_USER_SUCCESS') {
           if (storeState.user.isAuthenticated === true) {
-            dispatch(push(routes.OPPORTUNITIES));
+            dispatch(push(routes.HOME));
           }
         }
 

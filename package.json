@@ -158,6 +158,7 @@
     "webpack-target-electron-renderer": "^0.4.0"
   },
   "dependencies": {
+    "@apollo/client": "3.3.7",
     "@apollo/react-hooks": "^3.1.5",
     "@date-io/date-fns": "1.x",
     "@fortawesome/fontawesome-free": "5.14.0",

@@ -156,7 +156,7 @@ const LeftHeaderList = ({ user }: any) => {
   const dispatch = useDispatch();
 
   const gotoDrops = () => {
-    dispatch(push(routes.OPPORTUNITIES));
+    dispatch(push(routes.HOME));
   };
 
   // const gotoCompanies = () => {

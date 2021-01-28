@@ -47,6 +47,7 @@ export type Mutation = {
   appleSignUp?: Maybe<User>;
   googleSignIn?: Maybe<User>;
   googleSignUp?: Maybe<User>;
+  resizeImage?: Maybe<ReturnObject>;
 };
 
 
@@ -92,6 +93,14 @@ export type MutationGoogleSignUpArgs = {
   imageURL: Scalars['String'];
 };
 
+
+export type MutationResizeImageArgs = {
+  url: Scalars['String'];
+  height?: Maybe<Scalars['Int']>;
+  width: Scalars['Int'];
+  format?: Maybe<Scalars['String']>;
+};
+
 export type Subscription = {
   __typename?: 'Subscription';
   _dummy?: Maybe<Scalars['Boolean']>;
@@ -118,6 +127,11 @@ export type AppleUser = {
   email_verified?: Maybe<Scalars['String']>;
   is_private_email?: Maybe<Scalars['String']>;
   real_user_status?: Maybe<Scalars['Int']>;
+};
+
+export type ReturnObject = {
+  __typename?: 'ReturnObject';
+  image?: Maybe<Scalars['JSONObject']>;
 };
 
 export type AppleUserFragment = (
@@ -188,6 +202,22 @@ export type GoogleSignUpMutation = (
   & { googleSignUp?: Maybe<(
     { __typename?: 'User' }
     & UserFragment
+  )> }
+);
+
+export type ResizeImageMutationVariables = Exact<{
+  url: Scalars['String'];
+  height?: Maybe<Scalars['Int']>;
+  width: Scalars['Int'];
+  format?: Maybe<Scalars['String']>;
+}>;
+
+
+export type ResizeImageMutation = (
+  { __typename?: 'Mutation' }
+  & { resizeImage?: Maybe<(
+    { __typename?: 'ReturnObject' }
+    & Pick<ReturnObject, 'image'>
   )> }
 );
 
@@ -397,6 +427,41 @@ export function useGoogleSignUpMutation(baseOptions?: ApolloReactHooks.MutationH
 export type GoogleSignUpMutationHookResult = ReturnType<typeof useGoogleSignUpMutation>;
 export type GoogleSignUpMutationResult = ApolloReactCommon.MutationResult<GoogleSignUpMutation>;
 export type GoogleSignUpMutationOptions = ApolloReactCommon.BaseMutationOptions<GoogleSignUpMutation, GoogleSignUpMutationVariables>;
+export const ResizeImageDocument = gql`
+    mutation ResizeImage($url: String!, $height: Int, $width: Int!, $format: String) {
+  resizeImage(url: $url, height: $height, width: $width, format: $format) {
+    image
+  }
+}
+    `;
+export type ResizeImageMutationFn = ApolloReactCommon.MutationFunction<ResizeImageMutation, ResizeImageMutationVariables>;
+
+/**
+ * __useResizeImageMutation__
+ *
+ * To run a mutation, you first call `useResizeImageMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useResizeImageMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [resizeImageMutation, { data, loading, error }] = useResizeImageMutation({
+ *   variables: {
+ *      url: // value for 'url'
+ *      height: // value for 'height'
+ *      width: // value for 'width'
+ *      format: // value for 'format'
+ *   },
+ * });
+ */
+export function useResizeImageMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<ResizeImageMutation, ResizeImageMutationVariables>) {
+        return ApolloReactHooks.useMutation<ResizeImageMutation, ResizeImageMutationVariables>(ResizeImageDocument, baseOptions);
+      }
+export type ResizeImageMutationHookResult = ReturnType<typeof useResizeImageMutation>;
+export type ResizeImageMutationResult = ApolloReactCommon.MutationResult<ResizeImageMutation>;
+export type ResizeImageMutationOptions = ApolloReactCommon.BaseMutationOptions<ResizeImageMutation, ResizeImageMutationVariables>;
 export const SignInDocument = gql`
     mutation SignIn($email: String!, $password: String!) {
   signIn(email: $email, password: $password) {
